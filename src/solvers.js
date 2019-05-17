@@ -71,9 +71,7 @@ window.findNQueensSolution = function(n) {
   solutions(0);
 
   var solution = board.rows();
-  if (n === 1) {
-    solution = [[1]];
-  }
+
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return solution;
 };
