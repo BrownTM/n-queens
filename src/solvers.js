@@ -51,12 +51,13 @@ window.findNQueensSolution = function(n) {
 
   var solutions = function(row) {
     if (row === n) {
-      return function() {
+      return function() { //why does this cause it to run faster?
         return board.rows().map(function(row) {
           return row.slice();
         });
       };
     }
+
     for (var col = 0; col < n; ++col) {
       board.togglePiece(row, col);
       if (!board.hasAnyQueensConflicts()) {
@@ -81,9 +82,11 @@ window.countNQueensSolutions = function(n) {
   var solutionCount = 0;
   var board = new Board({n});
 
-  if (n === 2 || n === 3) {
-    return solutionCount;
-  }
+  // if (n === 2 || n === 3) {
+  //   return solutionCount;
+  // } else if (n === 0 || n === 1) {
+  //   return 1;
+  // }
 
   var solutions = function(row) {
     if (row === n) {
@@ -97,7 +100,14 @@ window.countNQueensSolutions = function(n) {
       board.togglePiece(row, col);
     }
   };
-  solutions(0);
+  //Allows console.log to include 0-3 queens cases, might add to time though, but not by much
+  if (n === 2 || n === 3) {
+    solutionCount;
+  } else if (n === 0 || n === 1) {
+    solutionCount = 1;
+  } else {
+    solutions(0);
+  }
 
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
